@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#0a0c10" />
+  <meta name="description" content="Минималистичный таймер Помодоро: 25 минут работы, 5 минут отдыха, звуковой сигнал и тёмная тема." />
+  <title>Помодоро — таймер фокуса</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-mode="work">
+  <div class="app">
+    <header class="app__header">
+      <div class="brand">
+        <span class="brand__mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="14" r="7" />
+            <path d="M12 7c-.4-1.9.6-3.6 2.4-4.2M12 7c.2-1.9-1.2-3.3-3-3.5" />
+          </svg>
+        </span>
+        <span class="brand__text">Помодоро</span>
+      </div>
+
+      <button class="sound" id="soundToggle" type="button" aria-pressed="true" aria-label="Выключить звук" title="Звук включён">
+        <svg class="icon-on" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4 9.5v5h3.3l4.2 3.4V6.1L7.3 9.5H4Z" />
+          <path d="M15.3 9a4.2 4.2 0 0 1 0 6M17.9 6.4a7.8 7.8 0 0 1 0 11.2" />
+        </svg>
+        <svg class="icon-off" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4 9.5v5h3.3l4.2 3.4V6.1L7.3 9.5H4Z" />
+          <path d="m16 9.5 5 5m0-5-5 5" />
+        </svg>
+      </button>
+    </header>
+
+    <main class="app__main">
+      <h1 class="sr-only">Таймер Помодоро</h1>
+
+      <div class="modes" role="tablist" aria-label="Режим таймера">
+        <button class="mode is-active" type="button" role="tab" aria-selected="true" data-mode="work">
+          Работа
+          <span class="mode__time">25 мин</span>
+        </button>
+        <button class="mode" type="button" role="tab" aria-selected="false" data-mode="break">
+          Перерыв
+          <span class="mode__time">5 мин</span>
+        </button>
+      </div>
+
+      <section class="timer" aria-label="Таймер обратного отсчёта">
+        <svg class="timer__ring" viewBox="0 0 300 300" aria-hidden="true" focusable="false">
+          <circle class="timer__track" cx="150" cy="150" r="134" />
+          <circle class="timer__progress" id="progressBar" cx="150" cy="150" r="134" />
+        </svg>
+
+        <div class="timer__content">
+          <p class="timer__label" id="timerLabel">Время работать</p>
+          <time class="timer__display" id="timerDisplay" datetime="PT25M" aria-live="off">25:00</time>
+          <p class="timer__meta" id="sessionInfo">Помидоров завершено: 0</p>
+        </div>
+      </section>
+
+      <div class="controls">
+        <button class="btn btn--primary" id="startBtn" type="button">Старт</button>
+        <button class="btn btn--ghost" id="resetBtn" type="button">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <polyline points="1 4 1 10 7 10" />
+            <path d="M3.5 15a9 9 0 1 0 2.1-9.4L1 10" />
+          </svg>
+          Сброс
+        </button>
+        <button class="btn btn--ghost" id="skipBtn" type="button">
+          Пропустить
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <polygon points="5 4 15 12 5 20 5 4" />
+            <line x1="19" y1="5" x2="19" y2="19" />
+          </svg>
+        </button>
+      </div>
+    </main>
+
+    <footer class="app__footer">
+      <p class="hints">
+        <span><kbd>Пробел</kbd> старт / пауза</span>
+        <span><kbd>R</kbd> сброс</span>
+        <span><kbd>1</kbd><kbd>2</kbd> режим</span>
+      </p>
+    </footer>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <noscript>
+    <p class="noscript">Для работы таймера необходимо включить JavaScript.</p>
+  </noscript>
+
+  <script src="script.js"></script>
+</body>
+</html>
